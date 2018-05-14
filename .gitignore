@@ -1,3 +1,4 @@
 *.out
 *.qbout
 *.qubo
+qbsolv
