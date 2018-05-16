@@ -19,6 +19,7 @@ def txt2_qubo(qubo_out, text_in):
             number_to_index[numbers] = idx
             index_to_number[idx] = numbers
             idx += 1
+
     # we need some information in advance for the qubo, specifically the number of nodes,
     # the number of couplers and sum of numbers
     num_nodes = len(index_to_number)
@@ -40,9 +41,6 @@ def txt2_qubo(qubo_out, text_in):
             n = number * (sum_numbers - number) * (-1)
             qubo.write("c " + str(number) + "'s qubo \n")
             qubo.write("  " + str(id) + " " + str(id) + " " + str(n) +  " \n")
-            # qubo.write("  " + str(st * 4 + 1) + " " + str(st * 4 + 1) + " -1 " + "\n")
-            # qubo.write("  " + str(st * 4 + 2) + " " + str(st * 4 + 2) + " -1 " + "\n")
-            # qubo.write("  " + str(st * 4 + 3) + " " + str(st * 4 + 3) + " -1 " + "\n")
 
         qubo.write("c" + "\n")
         qubo.write("c  Couplers " + "\n")
@@ -54,10 +52,6 @@ def txt2_qubo(qubo_out, text_in):
                 numberj = index_to_number[idxj]
                 n = numberi * numberj * 2
                 qubo.write("  " + str(idxi) + "   " + str(idxj) + " " + str(n) + " \n")
-            # qubo.write("c " + state + "   " + str(len(neighbors)) + " neighbors  " +
-            #            str(len(neighbors) * 4) + " external couplers\n")
-            # qubo.write("  " + str(st * 4) + " " + str(st * 4 + 1) + " 2 " + "\n")
-            #     qubo.write("  " + str(st * 4 + 3) + " " + str(ext_coup * 4 + 3) + " 1 " + "\n")
             
 
 if __name__ == "__main__":

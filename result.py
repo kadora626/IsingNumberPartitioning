@@ -1,7 +1,8 @@
 def print_result(p_input, qsolv_out):
     res_a = []
     res_b = []
-    enegy = 0
+    sum_a = 0
+    sum_b = 0
     index_to_number = {}
     qbsolv = open(qsolv_out, "r")
     lines = qbsolv.read()
@@ -18,23 +19,18 @@ def print_result(p_input, qsolv_out):
             number = int(line.strip('\n'))
             index_to_number[idx] = number
             idx += 1
-            enegy += number * number
-
-    for i in range(nqbits-1):
-        for j in range(i + 1 ,nqbits):
-            enegy += 2 * index_to_number[i] * index_to_number[j]
-
-    sol_enegy_str = lines[2].split()
-    sol_enegy = 4.0 * float(sol_enegy_str[0])
-    if sol_enegy + float(enegy) != 0:
-        print("This set of numbers cannot partition.")
-        return
 
     for i in range(nqbits):
         if result_bits[i] == '1':
             res_a.append(index_to_number[i])
+            sum_a += index_to_number[i]
         else:
             res_b.append(index_to_number[i])
+            sum_b += index_to_number[i]
+
+    if sum_a != sum_b:
+        print("This set of numbers cannot partition.")
+        return
 
     print("Partitioning result\n")
     print("GroupA:" + str(res_a) + "\n")
